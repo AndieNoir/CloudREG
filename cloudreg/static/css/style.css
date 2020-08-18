@@ -1,0 +1,28 @@
+main {
+  min-height: calc(100vh - 211px);
+}
+
+hr {
+  border-color: #393939;
+}
+
+.bordered-chart {
+  border: thin solid #999;
+  padding: 10px;
+}
+
+.breadcrumb {
+  border-radius: 0;
+}
+
+@media (max-width: 767px) {
+  .navbar-brand {
+    font-size: 1rem;
+  }
+}
+
+input,
+select,
+textarea {
+  max-width: 280px;
+}
