@@ -6,8 +6,9 @@ A Python web app for replicating [PEAR's psychokinesis experiment](http://noosph
 Running
 -------
 
-1. Install [ComScire driver](https://comscire.com/downloads/) or run [Quanttp](https://github.com/awasisto/quanttp)
-   on another machine and set `QUANTTP_SERVER` environment variable
+1. CloudREG supports both local and remote random number generation. For local, install [ComScire driver](https://comscire.com/downloads/).
+   For remote, run [Quanttp](https://github.com/awasisto/quanttp) on the remote machine and set `QUANTTP_SERVER`
+   environment variable
    
    Example:
 
