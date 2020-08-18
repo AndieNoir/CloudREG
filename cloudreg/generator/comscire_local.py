@@ -36,9 +36,9 @@ class ComScireLocal(Generator, id='comscire_local'):
             self.qng_pointer = self.libqwqng_wrapper.GetQwqngInstance()
 
     def get_bytes(self, length):
-        return self.get_bytes_windows(length) if self.os_windows else self.get_bytes_linux(length)
+        return self._get_bytes_windows(length) if self.os_windows else self._get_bytes_linux(length)
 
-    def get_bytes_windows(self, length):
+    def _get_bytes_windows(self, length):
         self.qng.Clear()
         if length <= 8192:
             return bytes(self.qng.RandBytes(length))
@@ -51,7 +51,7 @@ class ComScireLocal(Generator, id='comscire_local'):
                 data.extend(bytearray(self.qng.RandBytes(bytes_needed)))
             return bytes(data)
 
-    def get_bytes_linux(self, length):
+    def _get_bytes_linux(self, length):
         self.libqwqng_wrapper.Clear(self.qng_pointer)
         if length <= 8192:
             return self.libqwqng_wrapper.RandBytes(self.qng_pointer, length)[:length]
