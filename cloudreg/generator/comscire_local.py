@@ -39,6 +39,7 @@ class ComScireLocal(Generator, id='comscire_local'):
         return self.get_bytes_windows(length) if self.os_windows else self.get_bytes_linux(length)
 
     def get_bytes_windows(self, length):
+        self.qng.Clear()
         if length <= 8192:
             return bytes(self.qng.RandBytes(length))
         else:
@@ -51,6 +52,7 @@ class ComScireLocal(Generator, id='comscire_local'):
             return bytes(data)
 
     def get_bytes_linux(self, length):
+        self.libqwqng_wrapper.Clear(self.qng_pointer)
         if length <= 8192:
             return self.libqwqng_wrapper.RandBytes(self.qng_pointer, length)[:length]
         else:
