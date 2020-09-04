@@ -47,7 +47,7 @@ cumdev = [0]
 
 def update_cumdev():
     global log_file, websockets, cumdev
-    dt = datetime.datetime.utcnow().replace(tzinfo=datetime.timezone.utc).isoformat()
+    dt = datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S.%fZ')
     viewer_count = len(websockets)
     gaussian = generator.get_gaussian()
     if log_file is not None and (viewer_count > 0 or (viewer_count == 0 and config.LOG_ZERO_VIEWERS)):
