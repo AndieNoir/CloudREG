@@ -24,7 +24,7 @@ class ComScireQuanttp(Generator, id='comscire_quanttp'):
 
     def __init__(self):
         self.ws = websocket.WebSocket()
-        self.ws.connect('ws://%s/ws' % os.environ['QUANTTP_SERVER'])
+        self.ws.connect('ws://%s/ws' % os.environ['QUANTTP_LOCATION'])
 
     def get_bytes(self, length):
         self.ws.send('RANDBYTES %d' % length)

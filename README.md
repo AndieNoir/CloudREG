@@ -7,17 +7,17 @@ Running
 -------
 
 1. CloudREG supports both local and remote random number generation. For local, install [ComScire driver](https://comscire.com/downloads/).
-   For remote, run [Quanttp](https://github.com/awasisto/quanttp) on the remote machine and set `QUANTTP_SERVER`
+   For remote, run [Quanttp](https://github.com/awasisto/quanttp) on the remote machine and set `QUANTTP_LOCATION`
    environment variable
    
    Example:
 
    ```
    # Windows
-   set QUANTTP_SERVER=192.168.0.136:62456    
+   set QUANTTP_LOCATION=192.168.0.136:8080/quanttp
 
    # Linux
-   export QUANTTP_SERVER=192.168.0.136:62456
+   export QUANTTP_LOCATION=192.168.0.136:8080/quanttp
    ```
 
 2. Run the following commands

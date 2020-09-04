@@ -19,7 +19,7 @@ from cloudreg.generator.comscire_local import ComScireLocal
 from cloudreg.generator.comscire_quanttp import ComScireQuanttp
 
 
-GENERATOR_CLASS = ComScireQuanttp if ('QUANTTP_SERVER' in os.environ) else ComScireLocal
+GENERATOR_CLASS = ComScireQuanttp if ('QUANTTP_LOCATION' in os.environ) else ComScireLocal
 
 BYTES_PER_TRIAL = 25
 
