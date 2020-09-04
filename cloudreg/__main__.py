@@ -50,7 +50,7 @@ def update_cumdev():
     dt = datetime.datetime.utcnow().replace(tzinfo=datetime.timezone.utc).isoformat()
     viewer_count = len(websockets)
     gaussian = generator.get_gaussian()
-    if log_file is not None:
+    if log_file is not None and (viewer_count > 0 or (viewer_count == 0 and config.LOG_ZERO_VIEWERS)):
         log_file.write('%s,%.3f,%d,%s\n' % (dt, gaussian, viewer_count, generator.id))
         log_file.flush()
     if len(cumdev) >= 100:

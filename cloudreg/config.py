@@ -24,3 +24,5 @@ GENERATOR_CLASS = ComScireQuanttp if ('QUANTTP_LOCATION' in os.environ) else Com
 BYTES_PER_TRIAL = 25
 
 ENABLE_LOGGING = True
+
+LOG_ZERO_VIEWERS = True
