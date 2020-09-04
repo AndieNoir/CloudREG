@@ -17,10 +17,10 @@ import os
 
 import websocket
 
-from cloudreg.generator.base import Generator
+from cloudreg.generator.base import Generator, BitNumbering
 
 
-class ComScireQuanttp(Generator, id='comscire_quanttp'):
+class ComScireQuanttp(Generator, id='comscire_quanttp', bit_numbering=BitNumbering.LSB0):
 
     def __init__(self):
         self.ws = websocket.WebSocket()

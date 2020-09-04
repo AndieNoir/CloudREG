@@ -39,10 +39,10 @@ Adding a new random number generator
     ```python
     # cloudreg/generator/dev_hwrng.py
     
-    from cloudreg.generator.base import Generator
+    from cloudreg.generator.base import Generator, BitNumbering
     
     
-    class DevHwrng(Generator, id='my_rng'):
+    class DevHwrng(Generator, id='my_rng', bit_numbering=BitNumbering.UNKNOWN):
     
        def get_bytes(self, length):
            with open('/dev/hwrng', 'rb') as f:

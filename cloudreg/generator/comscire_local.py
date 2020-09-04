@@ -15,10 +15,10 @@
 
 import os
 
-from cloudreg.generator.base import Generator
+from cloudreg.generator.base import Generator, BitNumbering
 
 
-class ComScireLocal(Generator, id='comscire_local'):
+class ComScireLocal(Generator, id='comscire_local', bit_numbering=BitNumbering.LSB0):
 
     def __init__(self):
         self.os_windows = os.name == 'nt'
