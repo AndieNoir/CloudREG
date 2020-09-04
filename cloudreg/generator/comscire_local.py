@@ -28,12 +28,12 @@ class ComScireLocal(Generator, id='comscire_local', bit_numbering=BitNumbering.L
         else:
             import ctypes
             import platform
-            self.libqwqng_wrapper = ctypes.cdll.LoadLibrary('./libqwqng-wrapper-x86-64.so' if platform.machine().endswith('64') else './libqwqng-wrapper.so')
-            self.libqwqng_wrapper.GetQwqngInstance.restype = ctypes.c_void_p
-            self.libqwqng_wrapper.RandBytes.argtypes = [ctypes.c_void_p, ctypes.c_int]
-            self.libqwqng_wrapper.RandBytes.restype = ctypes.POINTER(ctypes.c_char)
-            self.libqwqng_wrapper.Clear.argtypes = [ctypes.c_void_p]
-            self.qng_pointer = self.libqwqng_wrapper.GetQwqngInstance()
+            self.qwqng_wrapper = ctypes.cdll.LoadLibrary('./libqwqng-wrapper-x86-64.so' if platform.machine().endswith('64') else './libqwqng-wrapper.so')
+            self.qwqng_wrapper.GetQwqngInstance.restype = ctypes.c_void_p
+            self.qwqng_wrapper.RandBytes.argtypes = [ctypes.c_void_p, ctypes.c_int]
+            self.qwqng_wrapper.RandBytes.restype = ctypes.POINTER(ctypes.c_char)
+            self.qwqng_wrapper.Clear.argtypes = [ctypes.c_void_p]
+            self.qng_pointer = self.qwqng_wrapper.GetQwqngInstance()
 
     def get_bytes(self, length):
         return self._get_bytes_windows(length) if self.os_windows else self._get_bytes_linux(length)
@@ -52,14 +52,14 @@ class ComScireLocal(Generator, id='comscire_local', bit_numbering=BitNumbering.L
             return bytes(data)
 
     def _get_bytes_linux(self, length):
-        self.libqwqng_wrapper.Clear(self.qng_pointer)
+        self.qwqng_wrapper.Clear(self.qng_pointer)
         if length <= 8192:
-            return self.libqwqng_wrapper.RandBytes(self.qng_pointer, length)[:length]
+            return self.qwqng_wrapper.RandBytes(self.qng_pointer, length)[:length]
         else:
             data = bytearray()
             for x in range(length // 8192):
-                data.extend(self.libqwqng_wrapper.RandBytes(self.qng_pointer, 8192)[:8192])
+                data.extend(self.qwqng_wrapper.RandBytes(self.qng_pointer, 8192)[:8192])
             bytes_needed = length % 8192
             if bytes_needed != 0:
-                data.extend(self.libqwqng_wrapper.RandBytes(self.qng_pointer, bytes_needed)[:bytes_needed])
+                data.extend(self.qwqng_wrapper.RandBytes(self.qng_pointer, bytes_needed)[:bytes_needed])
             return bytes(data)
