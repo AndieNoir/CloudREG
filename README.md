@@ -6,9 +6,9 @@ A Python web app for replicating [PEAR's psychokinesis experiment](http://noosph
 Running
 -------
 
-1. CloudREG supports both local and remote random number generation. For local, install [ComScire driver](https://comscire.com/downloads/).
-   For remote, run [Quanttp](https://github.com/awasisto/quanttp) on the remote machine and set `QUANTTP_LOCATION`
-   environment variable
+1. WebPsi currently supports local and remote random number generation using ComScire QNG. For local, install
+   [ComScire driver](https://comscire.com/downloads/). For remote, run [Quanttp](https://github.com/awasisto/quanttp)
+   on the remote machine and set `QUANTTP_LOCATION` environment variable
    
    Example:
 
@@ -39,10 +39,10 @@ Adding a new random number generator
     ```python
     # cloudreg/generator/dev_hwrng.py
     
-    from cloudreg.generator.base import Generator, BitNumbering
+    from cloudreg.generator.base import Generator
     
     
-    class DevHwrng(Generator, id='my_rng', bit_numbering=BitNumbering.UNKNOWN):
+    class DevHwrng(Generator, id='my_rng'):
     
        def get_bytes(self, length):
            with open('/dev/hwrng', 'rb') as f:
