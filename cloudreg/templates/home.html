@@ -9,6 +9,7 @@
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jstat/1.9.3/jstat.min.js"></script>
 </head>
 <body>
 <main role="main" class="container mt-4">
@@ -22,10 +23,9 @@
       <b>Try to make the graph to go up!</b>
     </div>
     <canvas class="mt-4 bordered-chart" id="cumdevChart"></canvas>
-    <div class="mt-4 mb-4">
-      Z-Score:<span id="zScore" class="ml-2"></span><br>
-      Users online:<span id="viewerCount" class="ml-2"></span>
-    </div>
+    <div class="mt-4">Z-Score:<span id="zScore" class="ml-2">-</span></div>
+    <div>P:<span id="p" class="ml-2">-</span></div>
+    <div class="mb-4">Users online:<span id="viewerCount" class="ml-2">-</span></div>
     <script>
         var envelope = [];
 
@@ -96,7 +96,7 @@
                             },
                             ticks: {
                                 max: 2 * envelope[envelope.length - 1]['y'],
-                                min: -1 * envelope[envelope.length - 1]['y'],
+                                min: -1.5 * envelope[envelope.length - 1]['y'],
                                 display: false
                             }
                         }
@@ -114,7 +114,10 @@
                 cumdevChartData.push({ x: i, y: message['cumdev'][i] })
             }
             cumdevChart.update();
-            $('#zScore').html((cumdevChartData[cumdevChartData.length - 1]['y'] / Math.sqrt(cumdevChartData.length)).toFixed(3));
+            var zScore = cumdevChartData[cumdevChartData.length - 1]['y'] / Math.sqrt(cumdevChartData.length)
+            var p = 1 - jStat.normal.cdf(zScore, 0, 1);
+            $('#zScore').html(zScore.toFixed(3));
+            $('#p').html(p.toFixed(3));
             $('#viewerCount').html(message['viewer_count']);
         };
     </script>
