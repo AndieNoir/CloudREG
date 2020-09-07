@@ -46,7 +46,7 @@ websockets = []
 cumdev = [0]
 
 def update_cumdev():
-    global log_file, websockets, cumdev
+    global cumdev
     dt = datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S.%fZ')
     viewer_count = len(websockets)
     gaussian = generator.get_gaussian()
@@ -80,7 +80,6 @@ def home():
 
 @sockets.route('/ws')
 def ws_trials(websocket):
-    global websockets, cumdev
     websockets.append(websocket)
     websocket.send(json.dumps({
         'cumdev': cumdev,

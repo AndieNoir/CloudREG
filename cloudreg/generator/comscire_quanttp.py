@@ -17,15 +17,16 @@ import os
 
 import websocket
 
-from cloudreg.generator.base import Generator, BitNumbering
+from cloudreg.generator.base import Generator
 
 
-class ComScireQuanttp(Generator, id='comscire_quanttp', bit_numbering=BitNumbering.LSB0):
+class ComScireQuanttp(Generator, id='comscire_quanttp'):
 
     def __init__(self):
-        self.ws = websocket.WebSocket()
-        self.ws.connect('ws://%s/ws' % os.environ['QUANTTP_LOCATION'])
+        self._ws = websocket.WebSocket()
+        self._ws.connect('ws://%s/ws' % os.environ['QUANTTP_LOCATION'])
 
-    def get_bytes(self, length):
-        self.ws.send('RANDBYTES %d' % length)
-        return self.ws.recv()
+    def get_bytes(self, length: int) -> bytes:
+        self._ws.send('CLEAR')
+        self._ws.send('RANDBYTES %d' % length)
+        return self._ws.recv()
