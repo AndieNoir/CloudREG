@@ -1,7 +1,8 @@
 CloudREG
 ========
 
-A Python web app for replicating [PEAR's psychokinesis experiment](http://noosphere.princeton.edu/rdnelson/reg.html).
+A Python web app for replicating PEAR's group [psychokinesis experiment](http://noosphere.princeton.edu/rdnelson/reg.html)
+ remotely.
 
 Running
 -------
