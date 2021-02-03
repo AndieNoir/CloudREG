@@ -23,8 +23,7 @@
       <b>Try to make the graph to go up!</b>
     </div>
     <canvas class="mt-4 bordered-chart" id="cumdevChart"></canvas>
-    <div class="mt-4">Z-Score:<span id="zScore" class="ml-2">-</span></div>
-    <div>P:<span id="p" class="ml-2">-</span></div>
+    <div class="mt-4">P:<span id="p" class="ml-2">-</span></div>
     <div class="mb-4">Users online:<span id="viewerCount" class="ml-2">-</span></div>
     <script>
         var envelope = [];
@@ -114,9 +113,8 @@
                 cumdevChartData.push({ x: i, y: message['cumdev'][i] })
             }
             cumdevChart.update();
-            var zScore = cumdevChartData[cumdevChartData.length - 1]['y'] / Math.sqrt(cumdevChartData.length)
-            var p = 1 - jStat.normal.cdf(zScore, 0, 1);
-            $('#zScore').html(zScore.toFixed(3));
+            var x = cumdevChartData[cumdevChartData.length - 1]['y'] / Math.sqrt(cumdevChartData.length)
+            var p = 1 - jStat.normal.cdf(x, 0, 1);
             $('#p').html(p.toFixed(3));
             $('#viewerCount').html(message['viewer_count']);
         };
